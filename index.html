@@ -1,0 +1,27 @@
+<!Doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web KeyBoard</title>
+    <script>
+        window.addEventListener("contextmenu", e => {
+            e.preventDefault()
+        })
+
+        window.addEventListener("keydown", e => {
+            if (e.code === "KeyR" && e.ctrlKey) e.preventDefault()
+            else if (e.code === "KeyI" && e.ctrlKey && e.shiftKey) e.preventDefault()
+            else if (e.code === "KeyP" && e.ctrlKey) e.preventDefault()
+            else if (e.code === "KeyX" && e.ctrlKey && e.shiftKey) e.preventDefault()
+        })
+    </script>
+</head>
+
+<body data-tauri-drag-region>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

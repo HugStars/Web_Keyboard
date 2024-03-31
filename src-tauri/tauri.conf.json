@@ -1,0 +1,84 @@
+{
+    "build": {
+        "beforeDevCommand": "npm run dev",
+        "beforeBuildCommand": "npm run build",
+        "devPath": "http://localhost:8080",
+        "distDir": "../dist",
+        "withGlobalTauri": true
+    },
+    "package": {
+        "productName": "KeyBoard",
+        "version": "0.0.1"
+    },
+    "tauri": {
+        "allowlist": {
+            "all": true,
+            "http": {
+                "all": true,
+                "request": true,
+                "scope": [
+                    "http://**",
+                    "https://**"
+                ]
+            },
+            "shell": {
+                "all": true,
+                "open": true,
+                "execute": true
+            },
+            "fs": {
+                "all": true,
+                "scope": [
+                    "*",
+                    "$DOWNLOAD/*"
+                ]
+            },
+            "window": {
+                "all": true
+            }
+        },
+        "bundle": {
+            "active": true,
+            "targets": "all",
+            "identifier": "com.keyboard.dev",
+            "icon": [
+                "icons/32x32.png",
+                "icons/128x128.png",
+                "icons/128x128@2x.png",
+                "icons/icon.ico"
+            ],
+            "windows": {
+                "wix": {
+                    "language": "zh-CN"
+                },
+                "nsis": {
+                    "languages": [
+                        "SimpChinese"
+                    ],
+                    "displayLanguageSelector": true
+                }
+            }
+        },
+        "security": {
+            "csp": null
+        },
+        "windows": [
+            {
+                "label": "keyboard",
+                "fullscreen": false,
+                "resizable": false,
+                "title": "KeyBoard",
+                "width": 800,
+                "height": 600,
+                "transparent": true,
+                "decorations": false,
+                "visible": true,
+                "center": true
+            }
+        ],
+        "systemTray": {
+            "iconPath": "icons/icon.png",
+            "iconAsTemplate": true
+        }
+    }
+}
