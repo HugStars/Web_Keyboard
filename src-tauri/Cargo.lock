@@ -3963,6 +3963,7 @@ dependencies = [
  "tauri",
  "tauri-build",
  "window-shadows",
+ "winreg 0.7.0",
 ]
 
 [[package]]
@@ -5068,6 +5069,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b7cf47b659b318dccbd69cc4797a39ae128f533dce7902a1096044d1967b9c16"
 dependencies = [
  "memchr",
+]
+
+[[package]]
+name = "winreg"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0120db82e8a1e0b9fb3345a539c478767c0048d842860994d96113d5b667bd69"
+dependencies = [
+ "winapi",
 ]
 
 [[package]]
