@@ -152,10 +152,10 @@ function keydown_fn(event) {
     if (event.target.classList[0] !== 'key') return
 
     if (event.target.dataset.key === 'Viscous') return ViscousFn()
-    if (event.target.dataset.key === 'Click') return ClickFn()
-    if (event.target.dataset.key === 'LockScreen') return LockScreenFn()
-    if (event.target.dataset.key === 'Shutdown') return ShutdownFn()
-    if (event.target.dataset.key === 'CancelShutdown') return CancelShutdownFn()
+    if (event.target.dataset.key === 'Click') return SendSingleEvent('/mouse_click')
+    if (event.target.dataset.key === 'LockScreen') return SendSingleEvent('/lock_screen')
+    if (event.target.dataset.key === 'Shutdown') return SendSingleEvent('/shutdown')
+    if (event.target.dataset.key === 'CancelShutdown') return SendSingleEvent('/cancel_shutdown')
     if (event.target.dataset.key === 'Change') return ChangeFn(event.target)
     if (["Shift", "Control", "Meta", "Alt"].includes(event.target.dataset.key) && CheckViscous.checked) return Viscous(event.target)
 
@@ -196,14 +196,6 @@ function Viscous(target) {
     Viscous_List.push(target.dataset.key)
 }
 
-function ClickFn() {
-    console.log("ClickFn, 发送点击事件")
-    let xhr = new XMLHttpRequest()
-    xhr.open('post', location.origin + "/mouse_click")
-    xhr.setRequestHeader("Content-Type", "application/json")
-    xhr.send()
-}
-
 function ChangeFn(target) {
     if (target.parentNode.className == 'keyboard') {
         document.querySelector('.keyboard').style.display = 'none'
@@ -215,26 +207,9 @@ function ChangeFn(target) {
     }
 }
 
-function LockScreenFn() {
-    console.log("LockScreenFn, 发送锁屏事件")
+function SendSingleEvent(path) {
     let xhr = new XMLHttpRequest()
-    xhr.open('post', location.origin + "/lock_screen")
-    xhr.setRequestHeader("Content-Type", "application/json")
-    xhr.send()
-}
-
-function ShutdownFn() {
-    console.log("ShutdownFn, 发送关机事件")
-    let xhr = new XMLHttpRequest()
-    xhr.open('post', location.origin + "/shutdown")
-    xhr.setRequestHeader("Content-Type", "application/json")
-    xhr.send()
-}
-
-function CancelShutdownFn() {
-    console.log("CancelShutdownFn, 发送取消关机事件")
-    let xhr = new XMLHttpRequest()
-    xhr.open('post', location.origin + "/cancel_shutdown")
+    xhr.open('post', location.origin + path)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.send()
 }
