@@ -42,7 +42,9 @@ pub async fn web_server() {
         .route("/mouse_click", post(post_mouse_click))
         .route("/lock_screen", post(post_lock_screen))
         .route("/shutdown", post(post_shutdown))
-        .route("/cancel_shutdown", post(post_cancel_shutdown));
+        .route("/cancel_shutdown", post(post_cancel_shutdown))
+        .route("/get_keyboard_css", get(get_keyboard_css))
+        .route("/get_keyboard_js", get(get_keyboard_js));
 
     println!("启动了Web服务子线程，监听8765端口");
 
@@ -70,9 +72,18 @@ async fn root() -> String {
 }
 
 async fn get_keyboard() -> Html<String> {
-    println!("获取了键盘控制页面");
-
+    println!("获取了键盘控制页面的HTML文件");
     Html(format!("{}", keyboard::KEYBOARD_HTML))
+}
+
+async fn get_keyboard_css() -> String {
+    println!("获取了键盘控制页面的CSS文件");
+    format!("{}", keyboard::KEYBOARD_CSS)
+}
+
+async fn get_keyboard_js() -> String {
+    println!("获取了键盘控制页面的JavaScript文件");
+    format!("{}", keyboard::KEYBOARD_JS)
 }
 
 async fn post_keyboard(Json(model): Json<KeyboardEvent>) -> String {
@@ -98,11 +109,7 @@ async fn post_keyboard(Json(model): Json<KeyboardEvent>) -> String {
         enigo.key_click(string_to_key(&keys[0]).unwrap());
     }
 
-    let message_data: serde_json::Value = json!({
-        "status": "success",
-        "code": "1"
-    });
-    return message_data.to_string();
+    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
 }
 
 async fn post_mouse_click() -> String {
@@ -111,11 +118,7 @@ async fn post_mouse_click() -> String {
     let mut enigo = Enigo::new();
     enigo.mouse_click(MouseButton::Left);
 
-    let message_data: serde_json::Value = json!({
-        "status": "success",
-        "code": "1"
-    });
-    return message_data.to_string();
+    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
 }
 
 async fn post_lock_screen() -> String {
@@ -129,12 +132,7 @@ async fn post_lock_screen() -> String {
         .output()
         .expect("执行命令失败");
 
-    let message_data: serde_json::Value = json!({
-        "status": "success",
-        "code": "1"
-    });
-
-    return message_data.to_string();
+    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
 }
 
 async fn post_shutdown() -> String {
@@ -148,12 +146,7 @@ async fn post_shutdown() -> String {
         .output()
         .expect("执行命令失败");
 
-    let message_data: serde_json::Value = json!({
-        "status": "success",
-        "code": "1"
-    });
-
-    return message_data.to_string();
+    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
 }
 
 async fn post_cancel_shutdown() -> String {
@@ -167,10 +160,5 @@ async fn post_cancel_shutdown() -> String {
         .output()
         .expect("执行命令失败");
 
-    let message_data: serde_json::Value = json!({
-        "status": "success",
-        "code": "1"
-    });
-
-    return message_data.to_string();
+    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
 }
