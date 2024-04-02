@@ -3,6 +3,7 @@ use std::env;
 use std::os::windows::process::CommandExt;
 use std::process::Command;
 use std::process::Stdio;
+use std::cell::Cell;
 use tauri::Manager;
 
 #[tauri::command]
@@ -35,4 +36,17 @@ pub fn open_browser_url(url: String) -> String {
         .expect("执行命令失败");
 
     return "执行成功".to_string();
+}
+
+// - 定义一个全局可变整数
+static mut  GLOBAL_COUNTER: Cell<usize> = Cell::new(0);
+
+#[tauri::command]
+pub fn is_first_open() -> String {
+    // 使用 unsafe 来访问和修改全局变量
+    unsafe {
+        let count = GLOBAL_COUNTER.get();
+        GLOBAL_COUNTER.set(count + 1);
+        format!("{}", count + 1)
+    }
 }

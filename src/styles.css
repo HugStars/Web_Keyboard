@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   -ms-tap-highlight-color: transparent;
   -moz-tap-highlight-color: transparent;
   -o-tap-highlight-color: transparent;
@@ -12,19 +12,21 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  display: flex;
   gap: 3vw;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   background: #fff;
 }
 
+body,
 main {
   display: flex;
+  align-items: center;
+}
+
+main {
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
   gap: 10vw;
   user-select: none;
 }
@@ -37,18 +39,19 @@ main {
 }
 
 .image-bg {
-  position: absolute;
   border-radius: 50%;
-  width: 192px;
-  height: 192px;
-  background-image: linear-gradient(135deg, #41cf7d 10%, #41cf7d 100%);
+  background-image: linear-gradient(135deg, #41cf7d 10%, #41cf7d);
   filter: blur(90px);
 }
 
+.image-bg,
 .img_box img {
   position: absolute;
   width: 192px;
   height: 192px;
+}
+
+.img_box img {
   object-fit: contain;
 }
 
@@ -72,6 +75,10 @@ main {
   line-height: 40px;
   font-size: 30px;
   font-weight: 700;
+}
+
+.tagline,
+.text {
   white-space: pre-wrap;
 }
 
@@ -81,8 +88,7 @@ main {
   line-height: 28px;
   font-size: 18px;
   font-weight: 500;
-  white-space: pre-wrap;
-  color: #3c3c43c7;
+  color: rgba(60, 60, 67, 0.78);
   cursor: pointer;
   user-select: all;
 }
@@ -94,7 +100,7 @@ main {
 
 .text_box img {
   width: 120px;
-  height: 0px;
+  height: 0;
   object-fit: contain;
   margin-left: -6px;
   transition: height 0.2s;
@@ -106,7 +112,7 @@ main {
 }
 
 .text_box img.error {
-  height: 0px;
+  height: 0;
   opacity: 0;
 }
 
@@ -119,45 +125,57 @@ section {
 button {
   display: flex;
   align-items: center;
-  gap: 4px;
   border-radius: 20px;
   padding: 0 20px;
   line-height: 38px;
   font-size: 14px;
   border-color: transparent;
-  color: white;
+  color: #fff;
   background-color: #41cf7d;
   font-weight: 700;
   cursor: pointer;
   outline: 0;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
-button:hover,
-button:active {
+button:active,
+button:hover {
   background: #33b469;
 }
 
-button:nth-of-type(3) {
+button.inactive {
   background: #f3f3f3;
   color: #3c3c43;
 }
 
-button:nth-of-type(3):hover,
-button:nth-of-type(3):active {
+button.inactive:active,
+button.inactive:hover {
   background: #e7e7e7;
 }
 
-button .checked{
-    transition: all .2s;
+.self_start .check {
+  transition: all 0.2s;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  -webkit-user-drag: none;
 }
 
-.none{
-    width: 0;
-    height: 0;
+.inactive .check {
+  transition: all 0.2s;
+  width: 0;
+  height: 0;
+  margin-right: 0;
 }
 
-.have{
-    width: 22px;
-    height: 22px;
+.time_str_class {
+  transition: all 0.2s;
+  width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.have_text {
+  width: 64px;
 }

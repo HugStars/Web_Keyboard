@@ -7,15 +7,14 @@
         <div class="text_box" data-tauri-drag-region>
             <h1 class="name" @click="invoke('open_browser_url', { url: 'https://keyboard.hugstars.top/' })">Web KeyBoard</h1>
             <p class="text" data-tauri-drag-region>{{ tips }}</p>
-            <p class="tagline" data-tauri-drag-region>{{ current_dir }}</p>
             <p class="tagline" @click="invoke('open_browser_url', { url: qr_code_src })">{{ keyboard_href }}</p>
             <img :class="qr_class" :src="qr_code_src" @error="e => e.target.classList.add('error')" />
         </div>
     </main>
     <section data-tauri-drag-region>
-        <button @click="set_self_start"> <img :class="self_start_status" src="/checked.svg"> 开机自启 </button>
-        <button @click="invoke('exit')">后台运行<span>（{{ time_num }}S后）</span></button>
-        <button @click="process.exit()">退出程序</button>
+        <button @click="SelfStartFn" :class="self_start_status"> <img class="check" src="/checked.svg"> 开机自启 </button>
+        <button @click="invoke('exit')">后台运行<span :class="time_str_class">{{ time_str }}</span></button>
+        <button @click="process.exit()" class="inactive">退出程序</button>
     </section>
 </template>
 
@@ -31,8 +30,10 @@ let reg_dir = ref("")
 let keyboard_href = ref("")
 let qr_code_src = ref("")
 let qr_class = ref("")
-let time_num = ref(3)
-let self_start_status = ref('checked none')
+let time_num = ref(4)
+let time_str = ref("")
+let time_str_class = ref("time_str_class")
+let self_start_status = ref('inactive')
 
 setTimeout(() => {
     invoke("web_server")
@@ -55,27 +56,47 @@ setTimeout(() => {
     // - 获取注册表信息，开机自启
     invoke("get_reg").then(res => {
         res = JSON.parse(res)
-        console.log(res.path)
         if (res.code == '1') {
             reg_dir.value = res.path
             if (reg_dir.value == current_dir.value) {
-                return self_start_status.value = 'checked have'
+                // - 判断是否是开机自启，如果是，就3s后关闭页面
+                // - 否则 不关闭页面
+                invoke("is_first_open").then(res => {
+                    if (res > 1) return
+                    Countdown()
+
+                    function Countdown() {
+                        return setTimeout(() => {
+                            if (time_num.value > 1) {
+                                time_str_class.value = 'time_str_class have_text'
+                                time_num.value--
+                                time_str.value = `（${time_num.value}秒后）`
+                                return Countdown()
+                            }
+                            invoke('exit')
+                        }, 1000)
+                    }
+                })
+                return self_start_status.value = 'self_start'
             }
-            console.log("获取到了注册表，没对上")
         }
-        else {
-            console.log('没有获取到注册表')
-            self_start_status.value = 'checked none'
-        }
+        else self_start_status.value = 'inactive'
     })
 })
 
-function set_self_start() {
-    if (self_start_status.value == 'checked have') return console.log('已注册')
+// - 点击开机自启相关功能
+function SelfStartFn() {
+    if (self_start_status.value == 'self_start') {
+        invoke("del_reg").then(res => {
+            res = JSON.parse(res)
+            if (res.code == 1) self_start_status.value = 'inactive'
+        })
+        return
+    }
+
     invoke("set_reg", { dir: current_dir.value }).then(res => {
         res = JSON.parse(res)
-        console.log(res)
+        if (res.code == 1) self_start_status.value = 'self_start'
     })
 }
-
 </script>

@@ -34,8 +34,10 @@ fn main() {
             command_sys::get_current_dir,
             command_sys::open_browser_url,
             command_sys::exit,
+            command_sys::is_first_open,
             command_reg::get_reg,
             command_reg::set_reg,
+            command_reg::del_reg,
             command_ws::web_server,
         ])
         .build(tauri::generate_context!())

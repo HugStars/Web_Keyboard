@@ -41,16 +41,49 @@ pub fn set_reg(dir: String) -> String {
         "Web_KeyBoard",
         &dir,
     );
-    match result {
-        Ok(_) => println!("注册表设置成功"),
-        Err(e) => println!("设置注册表时发生错误: {}", e),
-    }
 
-    let message_data: serde_json::Value = json!({
-        "status": "error",
-        "code": "0"
-    });
-    return message_data.to_string();
+    match result {
+        Ok(_) => {
+            let message_data: serde_json::Value = json!({
+                "status": "success",
+                "code": "1"
+            });
+            return message_data.to_string();
+        }
+        Err(_e) => {
+            let message_data: serde_json::Value = json!({
+                "status": "error",
+                "code": "0"
+            });
+            return message_data.to_string();
+        }
+    }
+}
+
+#[tauri::command]
+pub fn del_reg() -> String {
+    println!("删除注册表");
+
+    let result = del_reg_value(
+        r"Software\Microsoft\Windows\CurrentVersion\Run",
+        "Web_KeyBoard"
+    );
+    match result {
+        Ok(_) => {
+            let message_data: serde_json::Value = json!({
+                "status": "s",
+                "code": "1"
+            });
+            return message_data.to_string();
+        }
+        Err(_e) => {
+            let message_data: serde_json::Value = json!({
+                "status": "error",
+                "code": "0"
+            });
+            return message_data.to_string();
+        }
+    }
 }
 
 fn set_reg_value(key_path: &str, value_name: &str, value: &str) -> io::Result<()> {
@@ -71,4 +104,15 @@ fn get_reg_value(key_path: &str, value_name: &str) -> Result<String, io::Error> 
     let value = key.get_value(value_name)?;
 
     Ok(value)
+}
+
+fn del_reg_value(key_path: &str, value_name: &str) -> io::Result<()> {
+    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+    let key = hkcu.open_subkey_with_flags(key_path, KEY_WRITE)?;
+
+    // 删除指定名称的注册表值
+    key.delete_value(value_name)?;
+
+    // 返回空结果 Ok(())
+    Ok(())
 }
