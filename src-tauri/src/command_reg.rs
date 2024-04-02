@@ -1,7 +1,7 @@
 use serde_json::json;
 use std::io;
 use winreg::{
-    enums::{HKEY_CURRENT_USER, KEY_WRITE},
+    enums::{HKEY_LOCAL_MACHINE, KEY_WRITE},
     RegKey,
 };
 
@@ -65,7 +65,7 @@ pub fn del_reg() -> String {
     println!("删除注册表");
 
     let result = del_reg_value(
-        r"Software\Microsoft\Windows\CurrentVersion\Run",
+        r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",
         "Web_KeyBoard"
     );
     match result {
@@ -87,7 +87,7 @@ pub fn del_reg() -> String {
 }
 
 fn set_reg_value(key_path: &str, value_name: &str, value: &str) -> io::Result<()> {
-    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+    let hkcu = RegKey::predef(HKEY_LOCAL_MACHINE);
     let key = hkcu.open_subkey_with_flags(key_path, KEY_WRITE)?;
 
     // 创建或更新字符串类型的注册表值
@@ -97,7 +97,7 @@ fn set_reg_value(key_path: &str, value_name: &str, value: &str) -> io::Result<()
 }
 
 fn get_reg_value(key_path: &str, value_name: &str) -> Result<String, io::Error> {
-    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+    let hkcu = RegKey::predef(HKEY_LOCAL_MACHINE);
     let key = hkcu.open_subkey(key_path)?;
 
     // 获取注册表键值
@@ -107,7 +107,7 @@ fn get_reg_value(key_path: &str, value_name: &str) -> Result<String, io::Error> 
 }
 
 fn del_reg_value(key_path: &str, value_name: &str) -> io::Result<()> {
-    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+    let hkcu = RegKey::predef(HKEY_LOCAL_MACHINE);
     let key = hkcu.open_subkey_with_flags(key_path, KEY_WRITE)?;
 
     // 删除指定名称的注册表值
