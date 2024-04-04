@@ -10,7 +10,7 @@ pub fn get_reg() -> String {
     println!("获取注册表");
 
     let result = get_reg_value(
-        r"Software\Microsoft\Windows\CurrentVersion\Run",
+        r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run",
         "Web_KeyBoard",
     );
     match result {
@@ -37,7 +37,7 @@ pub fn set_reg(dir: String) -> String {
     println!("设置注册表：{}", &dir);
 
     let result = set_reg_value(
-        r"Software\Microsoft\Windows\CurrentVersion\Run",
+        r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run",
         "Web_KeyBoard",
         &dir,
     );
@@ -65,7 +65,7 @@ pub fn del_reg() -> String {
     println!("删除注册表");
 
     let result = del_reg_value(
-        r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",
+        r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run",
         "Web_KeyBoard"
     );
     match result {
