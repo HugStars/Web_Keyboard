@@ -1,4 +1,4 @@
-// ! 关闭在Windows启动时显示的控制台窗口，请勿删除！！
+// ! 关闭在Windows启动时显示的控制台黑窗口
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::{

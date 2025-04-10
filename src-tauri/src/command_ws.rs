@@ -15,11 +15,6 @@ use std::time::SystemTime;
 
 use crate::utils::string_to_key;
 
-#[derive(Deserialize)]
-struct KeyboardEvent {
-    keys: Vec<String>,
-}
-
 #[tauri::command]
 pub async fn web_server() {
     let output = Command::new("cmd")
@@ -86,6 +81,11 @@ async fn get_keyboard_js() -> String {
     format!("{}", keyboard::KEYBOARD_JS)
 }
 
+#[derive(Deserialize)]
+struct KeyboardEvent {
+    keys: Vec<String>,
+}
+
 async fn post_keyboard(Json(model): Json<KeyboardEvent>) -> String {
     let keys = model.keys;
 
@@ -135,13 +135,20 @@ async fn post_lock_screen() -> String {
     format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
 }
 
-async fn post_shutdown() -> String {
-    println!("30s后关机");
+#[derive(Deserialize)]
+struct ShotDownEvent {
+    time: String,
+}
+
+async fn post_shutdown( Json(model): Json<ShotDownEvent> ) -> String {
+    let time = model.time;
+
+    println!("{}", time.clone() + "s后关机");
 
     Command::new("cmd")
         .creation_flags(0x08000000)
         .arg("/c")
-        .arg("shutdown -s -t 30")
+        .arg("shutdown -s -t ".to_owned() + &time)
         .stdout(Stdio::piped())
         .output()
         .expect("执行命令失败");
@@ -149,8 +156,8 @@ async fn post_shutdown() -> String {
     format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
 }
 
-async fn post_cancel_shutdown() -> String {
-    println!("取消30s后关机");
+async fn post_cancel_shutdown( ) -> String {
+    println!("取消关机");
 
     Command::new("cmd")
         .creation_flags(0x08000000)

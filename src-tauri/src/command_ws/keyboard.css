@@ -42,7 +42,7 @@ header {
 .control_panel {
   display: grid;
   grid-template-columns: repeat(10, 1.9vw);
-  grid-template-rows: repeat(3, 4.75vw);
+  grid-template-rows: repeat(4, 4.75vw);
   grid-gap: 0.95vw;
   padding: 1.72vw;
   border-radius: 1.26vw;
@@ -158,7 +158,7 @@ svg {
 
   .control_panel {
     grid-template-columns: repeat(10, 1.9vh);
-    grid-template-rows: repeat(3, 4.75vh);
+    grid-template-rows: repeat(4, 4.75vh);
     grid-gap: 0.95vh;
     padding: 1.72vh;
   }

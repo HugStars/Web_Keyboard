@@ -116,11 +116,13 @@ let control_panel_list = [
     { "MediaNextTrack": { type: "other", value: `<svg style="width: 1.2rem;height: 1.2rem;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M759.466667 176.981333a42.666667 42.666667 0 0 1 42.666666 42.666667v584.746667l-0.298666 4.949333a42.666667 42.666667 0 0 1-85.034667-4.949333l-0.042667-179.882667-422.784 210.176a85.333333 85.333333 0 0 1-30.08 8.533333l-7.893333 0.426667a85.333333 85.333333 0 0 1-85.333333-85.333333V273.749333a85.333333 85.333333 0 0 1 127.146666-74.368l418.944 235.306667 0.042667-215.082667 0.298667-4.992a42.666667 42.666667 0 0 1 42.368-37.674666z"></path></svg>` } },
     { "empty_1": "empty" },
     { "Shutdown": { type: "other", value: `<svg style="width: 1.1em;height: 1.1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M540.8 534.4c32-16 32-12.8 32-260.8 0-203.2 0-225.6-9.6-241.6s-38.4-32-57.6-32c-19.2 0-48 12.8-57.6 28.8s-9.6 28.8-12.8 232c-3.2 241.6 0 244.8 32 267.2 22.4 16 51.2 16 73.6 6.4z m48 484.8C827.2 977.6 993.6 780.8 993.6 544c0-131.2-51.2-251.2-144-344C804.8 160 782.4 144 756.8 144c-38.4 0-67.2 32-67.2 70.4 0 19.2 9.6 35.2 64 86.4 70.4 67.2 105.6 147.2 105.6 241.6 0 150.4-102.4 286.4-248 331.2-54.4 16-147.2 16-200 0-54.4-16-121.6-60.8-156.8-99.2-35.2-38.4-70.4-102.4-83.2-153.6-9.6-41.6-9.6-121.6 0-163.2 19.2-76.8 64-140.8 124.8-190.4 44.8-35.2 54.4-57.6 38.4-92.8-12.8-25.6-44.8-44.8-76.8-35.2-51.2 12.8-137.6 105.6-180.8 190.4-32 62.4-44.8 116.8-44.8 195.2-3.2 64 0 83.2 9.6 124.8 41.6 174.4 169.6 305.6 340.8 356.8 38.4 12.8 64 16 118.4 16 30.4 0 75.2 0 88-3.2z" ></path></svg>` } },
-    { "Change": { type: "other", value: `<svg style="width: .9rem;height: .9rem;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M768.263314 250.88l120.978286-73.362286s7.168-4.315429 4.534857-17.627428a52.882286 52.882286 0 0 0-19.456-18.139429C868.688457 140.141714 601.570743 8.045714 601.570743 8.045714S578.603886-7.899429 557.319314 5.046857c-17.846857 10.825143-16.749714 30.134857-16.749714 30.134857l-22.601143 312.758857s4.681143 17.188571 10.825143 28.379429c9.728 9.069714 16.822857 4.754286 16.822857 4.754286l113.883429-69.046857L780.624457 532.48s73.142857 184.905143 12.726857 221.622857c0 0 190.171429-120.32 93.549715-296.009143"></path><path d="M257.726171 726.308571L136.747886 799.670857s-5.12 8.045714-2.486857 21.430857c6.144 11.264 11.776 12.8 13.897142 16.530286 5.558857 1.609143 272.676571 133.705143 272.676572 133.705143s23.04 15.945143 44.397714 2.998857 20.187429-32.182857 20.187429-32.182857l20.626285-316.562286s-2.633143-13.385143-8.777142-24.649143c-11.776-12.726857-18.944-8.411429-18.944-8.411428l-113.810286 69.046857-121.270857-220.598857S170.101029 256.146286 230.590171 219.428571c0 0-190.171429 120.246857-93.549714 296.009143"></path></svg>` } },
-    { "empty_1": "empty" },
-    { "empty_1": "empty" },
+    { "ScreenShot": { type: "other", value: `<svg style="width: 1.2rem;height: 1.2rem;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M853.333333 128H170.666667c-25.6 0-42.666667 17.066667-42.666667 42.666667v384h85.333333V213.333333h597.333334v341.333334h85.333333V170.666667c0-25.6-17.066667-42.666667-42.666667-42.666667z"></path><path d="M725.333333 597.333333c-29.866667 0-59.733333 8.533333-85.333333 25.6l-55.466667-55.466666 162.133334-162.133334L686.933333 341.333333l-162.133333 162.133334L358.4 341.333333 298.666667 401.066667l162.133333 162.133333-64 64c-25.6-17.066667-59.733333-29.866667-98.133333-29.866667-93.866667 0-170.666667 76.8-170.666667 170.666667s76.8 170.666667 170.666667 170.666667 170.666667-76.8 170.666666-170.666667c0-25.6-4.266667-51.2-17.066666-72.533333l68.266666-68.266667 55.466667 55.466667c-17.066667 25.6-25.6 55.466667-25.6 85.333333 0 93.866667 76.8 170.666667 170.666667 170.666667s170.666667-76.8 170.666666-170.666667-72.533333-170.666667-166.4-170.666667zM298.666667 853.333333c-46.933333 0-85.333333-38.4-85.333334-85.333333s38.4-85.333333 85.333334-85.333333 85.333333 38.4 85.333333 85.333333-38.4 85.333333-85.333333 85.333333z m426.666666 0c-46.933333 0-85.333333-38.4-85.333333-85.333333s38.4-85.333333 85.333333-85.333333 85.333333 38.4 85.333334 85.333333-38.4 85.333333-85.333334 85.333333z"></path></svg>` } },
+    { "CMD": { type: "other", value: `<svg style="width: 1.2rem;height: 1.2rem;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" ><path d="M896 128a64 64 0 0 1 64 64v640a64 64 0 0 1-64 64H128a64 64 0 0 1-64-64V192a64 64 0 0 1 64-64z m-16 64H144a16 16 0 0 0-15.552 12.352L128 208v608a16 16 0 0 0 12.352 15.552L144 832h736a16 16 0 0 0 15.552-12.352L896 816v-608a16 16 0 0 0-16-16zM312.448 353.6l135.744 135.744a32 32 0 0 1 0 45.312l-135.744 135.68a32 32 0 1 1-45.248-45.184L380.288 512 267.2 398.848a32 32 0 0 1 45.248-45.248zM736 614.4a32 32 0 1 1 0 64H512a32 32 0 1 1 0-64z"></path></svg>` } },
+    { "List": { type: "other", value: `<svg style="width: 1.2rem;height: 1.2rem;vertical-align: middle;fill: currentColor;overflow: hidden;"  viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"  ><path d="M249.429333 504.746667h62.378667l39.381333 59.562666c6.613333 10.112 18.346667 15.744 30.421334 14.506667a32.725333 32.725333 0 0 0 27.221333-19.968l49.621333-118.058667 54.784 125.013334c5.205333 11.989333 16.981333 19.712 30.037334 19.712h0.896a33.152 33.152 0 0 0 29.866666-21.461334l43.52-117.333333 22.741334 54.016c5.12 12.202667 17.066667 20.096 30.250666 20.096h111.786667a32.768 32.768 0 1 0 0-65.578667h-90.026667l-46.549333-110.250666a32.853333 32.853333 0 0 0-61.013333 1.408l-43.946667 118.869333-52.864-120.618667a32.853333 32.853333 0 0 0-60.288 0.426667l-55.466667 132.096-15.317333-23.253333a32.725333 32.725333 0 0 0-27.349333-14.762667H249.472a32.810667 32.810667 0 1 0 0 65.706667l-0.042667-0.170667z m623.616 213.546666H150.954667V193.578667h722.090666v524.714666z m0-590.293333H150.954667A65.706667 65.706667 0 0 0 85.333333 193.621333v524.714667a65.706667 65.706667 0 0 0 65.621334 65.578667h722.090666A65.706667 65.706667 0 0 0 938.666667 718.336V193.621333A65.706667 65.706667 0 0 0 873.045333 128zM273.365333 844.629333h480.725334a26.709333 26.709333 0 1 1 0 53.333334H273.365333a26.709333 26.709333 0 1 1 0-53.333334z"  ></path></svg>` } },
     { "empty_1": "empty" },
     { "CancelShutdown": { type: "other", value: `<svg style="width: 1.1em;height: 1.1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M540.8 534.4c32-16 32-12.8 32-260.8 0-203.2 0-225.6-9.6-241.6s-38.4-32-57.6-32c-19.2 0-48 12.8-57.6 28.8s-9.6 28.8-12.8 232c-3.2 241.6 0 244.8 32 267.2 22.4 16 51.2 16 73.6 6.4z m48 484.8C827.2 977.6 993.6 780.8 993.6 544c0-131.2-51.2-251.2-144-344C804.8 160 782.4 144 756.8 144c-38.4 0-67.2 32-67.2 70.4 0 19.2 9.6 35.2 64 86.4 70.4 67.2 105.6 147.2 105.6 241.6 0 150.4-102.4 286.4-248 331.2-54.4 16-147.2 16-200 0-54.4-16-121.6-60.8-156.8-99.2-35.2-38.4-70.4-102.4-83.2-153.6-9.6-41.6-9.6-121.6 0-163.2 19.2-76.8 64-140.8 124.8-190.4 44.8-35.2 54.4-57.6 38.4-92.8-12.8-25.6-44.8-44.8-76.8-35.2-51.2 12.8-137.6 105.6-180.8 190.4-32 62.4-44.8 116.8-44.8 195.2-3.2 64 0 83.2 9.6 124.8 41.6 174.4 169.6 305.6 340.8 356.8 38.4 12.8 64 16 118.4 16 30.4 0 75.2 0 88-3.2z" ></path><path d="M25.137849 146.514072A85.80985 85.80985 0 0 1 146.514073 25.137849l852.364189 852.364189a85.80985 85.80985 0 0 1-121.307958 121.307958z m0 0" ></path></svg>` } },
+    { "Change": { type: "other", value: `<svg style="width: .9rem;height: .9rem;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M768.263314 250.88l120.978286-73.362286s7.168-4.315429 4.534857-17.627428a52.882286 52.882286 0 0 0-19.456-18.139429C868.688457 140.141714 601.570743 8.045714 601.570743 8.045714S578.603886-7.899429 557.319314 5.046857c-17.846857 10.825143-16.749714 30.134857-16.749714 30.134857l-22.601143 312.758857s4.681143 17.188571 10.825143 28.379429c9.728 9.069714 16.822857 4.754286 16.822857 4.754286l113.883429-69.046857L780.624457 532.48s73.142857 184.905143 12.726857 221.622857c0 0 190.171429-120.32 93.549715-296.009143"></path><path d="M257.726171 726.308571L136.747886 799.670857s-5.12 8.045714-2.486857 21.430857c6.144 11.264 11.776 12.8 13.897142 16.530286 5.558857 1.609143 272.676571 133.705143 272.676572 133.705143s23.04 15.945143 44.397714 2.998857 20.187429-32.182857 20.187429-32.182857l20.626285-316.562286s-2.633143-13.385143-8.777142-24.649143c-11.776-12.726857-18.944-8.411429-18.944-8.411428l-113.810286 69.046857-121.270857-220.598857S170.101029 256.146286 230.590171 219.428571c0 0-190.171429 120.246857-93.549714 296.009143"></path></svg>` } },
+    { "empty_1": "empty" },
 ]
 
 let main_html_str = ``
@@ -147,16 +149,31 @@ document.querySelector('.control_panel').innerHTML = control_panel_html_str
 
 document.querySelector('body').addEventListener('click', e => keydown_fn(e))
 document.querySelector('body').addEventListener('touch', e => keydown_fn(e))
+document.querySelector('body').addEventListener('dblclick', e => dblclick_fn(e))
+
 
 function keydown_fn(event) {
     if (event.target.classList[0] !== 'key') return
 
+    let FnObj = {
+        Click: "/mouse_click",
+        LockScreen: "/lock_screen",
+        ScreenShot: "/screen_shot",
+        CancelShutdown: "/cancel_shutdown",
+        CMD: "/cmd",
+        List: "/list"
+    }
+
+    let OtherFnObj = {
+        Shutdown: "/shutdown",
+    }
+
     if (event.target.dataset.key === 'Viscous') return ViscousFn()
-    if (event.target.dataset.key === 'Click') return SendSingleEvent('/mouse_click')
-    if (event.target.dataset.key === 'LockScreen') return SendSingleEvent('/lock_screen')
-    if (event.target.dataset.key === 'Shutdown') return SendSingleEvent('/shutdown')
-    if (event.target.dataset.key === 'CancelShutdown') return SendSingleEvent('/cancel_shutdown')
     if (event.target.dataset.key === 'Change') return ChangeFn(event.target)
+
+    if (FnObj[event.target.dataset.key]) return SendSingleEvent(FnObj[event.target.dataset.key])
+    if (OtherFnObj[event.target.dataset.key]) return SendSingleEvent(OtherFnObj[event.target.dataset.key], { time: '30' })
+
     if (["Shift", "Control", "Meta", "Alt"].includes(event.target.dataset.key) && CheckViscous.checked) return Viscous(event.target)
 
     console.log(event.target.dataset.key)
@@ -175,15 +192,19 @@ function keydown_fn(event) {
     Viscous_List.length = 0
 }
 
+function dblclick_fn(event) {
+    if (event.target.classList[1] !== 'Shutdown') return
+    SendSingleEvent('/shutdown', { time: '10' })
+}
+
 function ViscousFn() {
     CheckViscous.checked = !CheckViscous.checked
-    if (CheckViscous.checked) document.querySelector('.Viscous').classList.add("check")
-    else {
-        ['Viscous', , 'Shift', 'Control', 'Meta', 'Alt'].forEach(key => {
-            document.querySelector('.' + key).classList.remove("check")
-        })
-        Viscous_List.length = 0
-    }
+    if (CheckViscous.checked) return document.querySelector('.Viscous').classList.add("check")
+
+    ['Viscous', 'Shift', 'Control', 'Meta', 'Alt'].forEach(key => {
+        document.querySelector('.' + key).classList.remove("check")
+    })
+    Viscous_List.length = 0
 }
 
 function Viscous(target) {
@@ -207,9 +228,12 @@ function ChangeFn(target) {
     }
 }
 
-function SendSingleEvent(path) {
+function SendSingleEvent(path, data) {
+    console.log(path, data)
+
     let xhr = new XMLHttpRequest()
     xhr.open('post', location.origin + path)
     xhr.setRequestHeader("Content-Type", "application/json")
+    if (data) return xhr.send(JSON.stringify(data))
     xhr.send()
 }
