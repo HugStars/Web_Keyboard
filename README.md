@@ -43,8 +43,9 @@
   - 示例 2：【Ctrl + Shift + Esc】任务管理器的组合按键顺序为：【<img src="https://github.com/HugStars/Web_Keyboard/assets/76810475/f78d2a2e-c898-473c-98a5-622cc77e838e" height="11px">】、【Ctrl】、【Shift】、【Esc】
 - <img src="https://github.com/HugStars/Web_Keyboard/assets/76810475/bf164330-4bf0-4b0c-bf59-f935aabc1660" width="16px">：切换副键盘
 - <img src="https://github.com/HugStars/Web_Keyboard/assets/76810475/38239afc-dba0-4de3-b409-102ad1769232" width="16px">：锁屏
-- <img src="https://github.com/HugStars/Web_Keyboard/assets/76810475/cb124c8d-f522-4244-99ac-9be074d324bd" width="16px">：30s 后关机
+- <img src="https://github.com/HugStars/Web_Keyboard/assets/76810475/cb124c8d-f522-4244-99ac-9be074d324bd" width="16px">：单击30s 后关机，双击10s后关机
 - <img src="https://github.com/HugStars/Web_Keyboard/assets/76810475/3a729083-d60a-45db-a221-8a0c8d127efa" width="16px">：取消关机
+- <img src="https://github.com/user-attachments/assets/d45a9087-cd6b-4ce3-b863-81a561ef1359" width="16px">：获取屏幕截图
 
 ## 构建命令：
 
