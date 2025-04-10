@@ -14,7 +14,10 @@ pub fn get_current_dir() -> String {
 
 #[tauri::command]
 pub fn get_local_ip() -> String {
-    return local_ipaddress::get().unwrap();
+    match local_ipaddress::get() {
+        Some(ip) => ip,
+        None => "127.0.0.1".to_string()
+    }
 }
 
 #[tauri::command]
