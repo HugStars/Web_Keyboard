@@ -1,13 +1,19 @@
 mod keyboard;
+use axum::response::IntoResponse;
 use axum::{
+    body::Bytes,
     extract::Json,
-    response::Html,
+    http::{HeaderMap, HeaderValue},
+    response::{Html, Response},
     routing::{get, post},
     Router,
 };
 use enigo::*;
+use image::ImageOutputFormat;
+use screenshots::Screen;
 use serde::Deserialize;
 use serde_json::json;
+use std::io::Cursor;
 use std::os::windows::process::CommandExt;
 use std::process::Command;
 use std::process::Stdio;
@@ -36,6 +42,7 @@ pub async fn web_server() {
         .route("/keyboard", get(get_keyboard).post(post_keyboard))
         .route("/mouse_click", post(post_mouse_click))
         .route("/lock_screen", post(post_lock_screen))
+        .route("/screen_shot", get(get_screen_shot))
         .route("/shutdown", post(post_shutdown))
         .route("/cancel_shutdown", post(post_cancel_shutdown))
         .route("/get_keyboard_css", get(get_keyboard_css))
@@ -85,7 +92,6 @@ async fn get_keyboard_js() -> String {
 struct KeyboardEvent {
     keys: Vec<String>,
 }
-
 async fn post_keyboard(Json(model): Json<KeyboardEvent>) -> String {
     let keys = model.keys;
 
@@ -109,7 +115,7 @@ async fn post_keyboard(Json(model): Json<KeyboardEvent>) -> String {
         enigo.key_click(string_to_key(&keys[0]).unwrap());
     }
 
-    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
+    format!("{}", "{\"status\": \"success\",\"code\": \"1\"}")
 }
 
 async fn post_mouse_click() -> String {
@@ -118,7 +124,7 @@ async fn post_mouse_click() -> String {
     let mut enigo = Enigo::new();
     enigo.mouse_click(MouseButton::Left);
 
-    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
+    format!("{}", "{\"status\": \"success\",\"code\": \"1\"}")
 }
 
 async fn post_lock_screen() -> String {
@@ -132,15 +138,43 @@ async fn post_lock_screen() -> String {
         .output()
         .expect("执行命令失败");
 
-    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
+    format!("{}", "{\"status\": \"success\",\"code\": \"1\"}")
+}
+
+async fn get_screen_shot() -> Result<Response, String> {
+    println!("获取截图");
+
+    let screens = Screen::all().map_err(|e| format!("获取屏幕失败: {}", e))?;
+
+    if screens.is_empty() {
+        return Err("没有找到屏幕".to_string());
+    }
+
+    let screen = screens[0];
+    let image = screen.capture().map_err(|e| format!("截图失败: {}", e))?;
+
+    let mut bytes = Vec::new();
+    let mut cursor = Cursor::new(&mut bytes);
+
+    image
+        .write_to(&mut cursor, ImageOutputFormat::Png)
+        .map_err(|e| format!("图像编码失败: {}", e))?;
+
+    let mut headers = HeaderMap::new();
+    headers.insert("Content-Type", HeaderValue::from_static("image/png"));
+    headers.insert(
+        "Content-Disposition",
+        HeaderValue::from_static("inline; filename=\"screenshot.png\""),
+    );
+
+    Ok((headers, Bytes::from(bytes)).into_response())
 }
 
 #[derive(Deserialize)]
 struct ShotDownEvent {
     time: String,
 }
-
-async fn post_shutdown( Json(model): Json<ShotDownEvent> ) -> String {
+async fn post_shutdown(Json(model): Json<ShotDownEvent>) -> String {
     let time = model.time;
 
     println!("{}", time.clone() + "s后关机");
@@ -153,10 +187,10 @@ async fn post_shutdown( Json(model): Json<ShotDownEvent> ) -> String {
         .output()
         .expect("执行命令失败");
 
-    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
+    format!("{}", "{\"status\": \"success\",\"code\": \"1\"}")
 }
 
-async fn post_cancel_shutdown( ) -> String {
+async fn post_cancel_shutdown() -> String {
     println!("取消关机");
 
     Command::new("cmd")
@@ -167,5 +201,5 @@ async fn post_cancel_shutdown( ) -> String {
         .output()
         .expect("执行命令失败");
 
-    format!("{}","{\"status\": \"success\",\"code\": \"1\"}")
+    format!("{}", "{\"status\": \"success\",\"code\": \"1\"}")
 }

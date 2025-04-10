@@ -156,33 +156,39 @@ function keydown_fn(event) {
     if (event.target.classList[0] !== 'key') return
 
     let FnObj = {
-        Click: "/mouse_click",
-        LockScreen: "/lock_screen",
-        ScreenShot: "/screen_shot",
-        CancelShutdown: "/cancel_shutdown",
-        CMD: "/cmd",
-        List: "/list"
+        Click: { paht: "/mouse_click", type: 'post' },
+        LockScreen: { path: "/lock_screen", type: 'post' },
+        CancelShutdown: { path: "/cancel_shutdown", type: 'post' },
+        CMD: { path: "/cmd", type: 'post' },
+        List: { path: "/list", type: 'get' }
     }
 
     let OtherFnObj = {
         Shutdown: "/shutdown",
     }
 
-    if (event.target.dataset.key === 'Viscous') return ViscousFn()
-    if (event.target.dataset.key === 'Change') return ChangeFn(event.target)
+    let OpenObj = {
+        ScreenShot: "/screen_shot",
+    }
 
-    if (FnObj[event.target.dataset.key]) return SendSingleEvent(FnObj[event.target.dataset.key])
-    if (OtherFnObj[event.target.dataset.key]) return SendSingleEvent(OtherFnObj[event.target.dataset.key], { time: '30' })
+    let key = event.target.dataset.key
 
-    if (["Shift", "Control", "Meta", "Alt"].includes(event.target.dataset.key) && CheckViscous.checked) return Viscous(event.target)
+    if (key === 'Viscous') return ViscousFn()
+    if (key === 'Change') return ChangeFn(event.target)
 
-    console.log(event.target.dataset.key)
+    if (FnObj[key]) return SendSingleEvent(FnObj[key].path, null, FnObj[key].type)
+    if (OtherFnObj[key]) return SendSingleEvent(OtherFnObj[key], { time: '30' })
+    if (OpenObj[key]) return window.open(OpenObj[key])
+
+    if (["Shift", "Control", "Meta", "Alt"].includes(key) && CheckViscous.checked) return Viscous(event.target)
+
+    console.log(key)
 
     let xhr = new XMLHttpRequest()
     xhr.open('post', location.href)
     xhr.setRequestHeader("Content-Type", "application/json")
 
-    Viscous_List.push(event.target.dataset.key)
+    Viscous_List.push(key)
 
     xhr.send(JSON.stringify({
         "keys": Viscous_List
@@ -228,11 +234,10 @@ function ChangeFn(target) {
     }
 }
 
-function SendSingleEvent(path, data) {
-    console.log(path, data)
+function SendSingleEvent(path, data, type) {
 
     let xhr = new XMLHttpRequest()
-    xhr.open('post', location.origin + path)
+    xhr.open(type ? type : 'post', location.origin + path)
     xhr.setRequestHeader("Content-Type", "application/json")
     if (data) return xhr.send(JSON.stringify(data))
     xhr.send()
