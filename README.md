@@ -52,3 +52,10 @@
 运行：`npm run tauri dev`
 
 打包：`npm run tauri build`
+
+## 已知问题：
+
+#### 软件无法打开或者打开闪退：
+确保电脑存在 Webview Runtime
+检查方式：打开设置，在“应用”中，选择“安装的应用（Win10是应用和功能）”，搜索webview，如果没有找到，请安装。
+下载地址：`https://developer.microsoft.com/zh-cn/microsoft-edge/webview2`
