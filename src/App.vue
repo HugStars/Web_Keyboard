@@ -7,7 +7,7 @@
         <div class="text_box" data-tauri-drag-region>
             <h1 class="name" @click="invoke('open_browser_url', { url: 'https://keyboard.hugstars.top/' })">Web KeyBoard</h1>
             <p class="text" data-tauri-drag-region>{{ tips }}</p>
-            <p class="tagline" @click="invoke('open_browser_url', { url: qr_code_src })">{{ keyboard_href }}</p>
+            <p class="tagline" @click="invoke('open_browser_url', { url: keyboard_href })">{{ keyboard_href }}</p>
             <img :class="qr_class" :src="qr_code_src" @error="e => e.target.classList.add('error')" />
         </div>
     </main>
@@ -21,6 +21,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import QRCode from "qrcode"
 
 let { http, invoke, process } = window.__TAURI__
 
@@ -46,8 +47,15 @@ setTimeout(() => {
     // - 获取本机ip
     invoke("get_local_ip").then(res => {
         keyboard_href.value = `http://${res}:8765/keyboard`
-        qr_code_src.value = `https://api.pwmqr.com/qrcode/create/?url=${keyboard_href.value}`
-        qr_class.value = `padding`
+
+        QRCode.toCanvas(keyboard_href.value, {
+            errorCorrectionLevel: 'L',
+            margin: 2,
+            scale: 5,
+        }, (err, result) => {
+            if (err) return console.log('生成失败', err)
+            result.toBlob((blob) => qr_code_src.value = URL.createObjectURL(blob))
+        })
     })
 
     // - 获取运行目录
@@ -56,31 +64,30 @@ setTimeout(() => {
     // - 获取注册表信息，开机自启
     invoke("get_reg").then(res => {
         res = JSON.parse(res)
-        if (res.code == '1') {
-            reg_dir.value = res.path
-            if (reg_dir.value == current_dir.value) {
-                // - 判断是否是开机自启，如果是，就3s后关闭页面
-                // - 否则 不关闭页面
-                invoke("is_first_open").then(res => {
-                    if (res > 1) return
-                    Countdown()
+        if (res.code != '1') return self_start_status.value = 'inactive'
 
-                    function Countdown() {
-                        return setTimeout(() => {
-                            if (time_num.value > 1) {
-                                time_str_class.value = 'time_str_class have_text'
-                                time_num.value--
-                                time_str.value = `（${time_num.value}秒后）`
-                                return Countdown()
-                            }
-                            invoke('exit')
-                        }, 1000)
+        reg_dir.value = res.path
+        if (reg_dir.value != current_dir.value) return
+
+        // - 判断是否是开机自启，如果是，就3s后关闭页面
+        // - 否则 不关闭页面
+        invoke("is_first_open").then(res => {
+            if (res > 1) return
+            Countdown()
+
+            function Countdown() {
+                return setTimeout(() => {
+                    if (time_num.value > 1) {
+                        time_str_class.value = 'time_str_class have_text'
+                        time_num.value--
+                        time_str.value = `（${time_num.value}秒后）`
+                        return Countdown()
                     }
-                })
-                return self_start_status.value = 'self_start'
+                    invoke('exit')
+                }, 1000)
             }
-        }
-        else self_start_status.value = 'inactive'
+        })
+        return self_start_status.value = 'self_start'
     })
 })
 
