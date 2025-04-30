@@ -205,7 +205,10 @@ function dblclick_fn(event) {
 
 function ViscousFn() {
     CheckViscous.checked = !CheckViscous.checked
-    if (CheckViscous.checked) return document.querySelector('.Viscous').classList.add("check")
+    if (CheckViscous.checked) {
+        document.querySelector('.Viscous').classList.add("check")
+        return
+    }
 
     ['Viscous', 'Shift', 'Control', 'Meta', 'Alt'].forEach(key => {
         document.querySelector('.' + key).classList.remove("check")
