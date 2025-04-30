@@ -99,16 +99,10 @@ main {
 }
 
 .text_box img {
-  width: 120px;
-  height: 0;
   object-fit: contain;
   margin-left: -6px;
   transition: height 0.2s;
   -webkit-user-drag: none;
-}
-
-.text_box img.padding {
-  height: 120px;
 }
 
 .text_box img.error {

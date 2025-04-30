@@ -66,7 +66,7 @@ pub fn del_reg() -> String {
 
     let result = del_reg_value(
         r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run",
-        "Web_KeyBoard"
+        "Web_KeyBoard",
     );
     match result {
         Ok(_) => {
